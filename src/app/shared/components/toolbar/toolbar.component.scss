@@ -1,0 +1,80 @@
+.logo {
+  position: relative;
+  top: -3.8px;
+  height: 100%;
+  font-family: Bebas, sans-serif;
+  font-size: 50pt;
+  letter-spacing: -5px;
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  padding-left: 2.5px;
+}
+
+mat-toolbar {
+  justify-content: center;
+  background-color: #e23636 !important;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  justify-items: start;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  max-width: 1000px;
+}
+
+.form-field {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+}
+
+.form-field input::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.form-field input {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 2px rgba($color: #fff, $alpha: 0.7) solid;
+  border-radius: 50px;
+
+  font-size: 16pt;
+  transition: border-color 0.25s;
+  padding: 8px;
+  padding-left: 37px;
+  outline: none;
+}
+
+.form-field input:focus {
+  border-color: #fff;
+}
+
+.form-field .search-icon {
+  position: relative;
+  left: 35px;
+}
+
+@media only screen and (max-width: 540px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-field {
+    justify-content: flex-start;
+  }
+  .form-field input {
+    font-size: 10pt;
+    padding-left: 37px;
+  }
+  .logo {
+    font-size: 32pt;
+  }
+}
