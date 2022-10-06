@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { allCharacters } from '../../model/character';
 import { CharactersService } from '../../services/characters.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class CharactersListComponent implements OnInit {
   //Variaveis
   private offset: number = 40;
 
-  allCharacters: any[] = [];
+  allCharacters: allCharacters[] = [];
 
   isLoading: boolean = true;
 
