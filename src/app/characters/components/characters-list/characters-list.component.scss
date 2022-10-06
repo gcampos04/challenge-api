@@ -23,19 +23,24 @@ section {
   border: 1px solid rgba($color: #000000, $alpha: 0.12);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 5px;
   width: 290px;
-  min-height: 226px;
+  min-height: 100%;
   background-color: #504a4a;
 }
 
 .card-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: x-large;
+  // display: -webkit-box;
+  // -webkit-line-clamp: 2;
+  // -webkit-box-orient: vertical;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // font-size: x-large;
+}
+
+.mat-card-header-text{
+  margin-left: 0px;
 }
 
 .card-image {
@@ -54,11 +59,15 @@ section {
 .card-content p {
   height: fit-content;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  // -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
+  // text-align: center;
+}
+
+.mat-card-header{
+  margin-bottom: 1.5rem;
 }
 
 .actions {
