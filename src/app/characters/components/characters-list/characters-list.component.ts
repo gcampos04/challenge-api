@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { ModalComponent } from 'src/app/characters/components/modal/modal.component';
 import { allCharacters } from '../../model/character';
 import { CharactersService } from '../../services/characters.service';
 
