@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { CharactersService } from 'src/app/characters/services/characters.service';
 
@@ -7,13 +7,11 @@ import { CharactersService } from 'src/app/characters/services/characters.servic
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   constructor(
     private sidenav: AppComponent,
     private _charactersService: CharactersService
   ) {}
-
-  ngOnInit(): void {}
 
   toggleSideNav() {
     this.sidenav.toggle();

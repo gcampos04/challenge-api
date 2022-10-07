@@ -5,8 +5,8 @@
       <mat-list-item role="listitem" *ngFor="let item of data.info">{{
         item.title
       }}</mat-list-item>
-      <mat-list-item role="listitem" *ngIf="data.length == 0">{{
-        data.type == "comics" ? "Comics unavailable" : "Series unavailable"
+      <mat-list-item role="listitem" *ngIf="data.length === 0">{{
+        data.type === "comics" ? "Comics unavailable" : "Series unavailable"
       }}</mat-list-item>
     </mat-list>
   </mat-dialog-content>
