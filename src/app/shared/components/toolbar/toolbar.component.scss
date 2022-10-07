@@ -78,3 +78,15 @@ mat-toolbar {
     font-size: 32pt;
   }
 }
+
+.float{
+  width: 100%;
+  z-index: 100;
+  top: 0;
+  height: 80px;
+  position: fixed;
+}
+
+a{
+  text-decoration: none
+}

@@ -1,15 +1,19 @@
-<mat-toolbar>
-  <div class="container">
-    <div class="logo" translate="no">MARVE<span>L</span></div>
-    <div class="form-field">
-      <mat-icon class="search-icon">search</mat-icon>
-      <input
-        type="text"
-        placeholder="Search for a character"
-        #inputSearch
-        (input)="search(inputSearch)"
-      />
+<div class="float">
+  <mat-toolbar>
+    <div class="container">
+      <a href="/">
+        <div class="logo" translate="no">MARVE<span>L</span></div>
+      </a>
+      <div class="form-field">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input
+          type="text"
+          placeholder="Search for a character"
+          #inputSearch
+          (input)="search(inputSearch)"
+        />
+      </div>
     </div>
-  </div>
-</mat-toolbar>
-<app-loading></app-loading>
+  </mat-toolbar>
+  <app-loading></app-loading>
+</div>
