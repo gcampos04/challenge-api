@@ -5,6 +5,8 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { allCharacters } from '../../model/character';
 import { CharactersService } from '../../services/characters.service';
 
@@ -18,6 +20,9 @@ export class CharactersListComponent implements OnInit {
   private offset: number = 40;
 
   allCharacters: allCharacters[] = [];
+
+  allSeries: any;
+  allComics: any;
 
   isLoading: boolean = true;
 
@@ -41,7 +46,10 @@ export class CharactersListComponent implements OnInit {
     }
   }
 
-  constructor(private _charactersService: CharactersService) {
+  constructor(
+    private _charactersService: CharactersService,
+    public dialog: MatDialog
+  ) {
     this._charactersService.getAllCharacters(0, 40);
   }
 
@@ -49,6 +57,43 @@ export class CharactersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCharacters();
+  }
+
+  onOpenModalSeries(idCharacter: number, nameCharacter: string) {
+    this.isLoading = true;
+    this._charactersService
+      .getCharacterSeries(idCharacter)
+      .subscribe((res: any) => {
+        this.allSeries = res?.data?.results;
+        this.dialog.open(ModalComponent, {
+          data: {
+            name: nameCharacter,
+            info: this.allSeries,
+            type: 'series',
+            length: this.allSeries.length,
+          },
+        });
+        this.isLoading = false;
+      });
+  }
+
+  onOpenModalComics(idCharacter: number, nameCharacter: string) {
+    this.isLoading = true;
+    this._charactersService
+      .getCharacterComics(idCharacter)
+      .subscribe((res: any) => {
+        this.isLoading = true;
+        this.allComics = res?.data?.results;
+        this.dialog.open(ModalComponent, {
+          data: {
+            name: nameCharacter,
+            info: this.allComics,
+            type: 'comics',
+            length: this.allComics.length,
+          },
+        });
+        this.isLoading = false;
+      });
   }
 
   getCharacters() {

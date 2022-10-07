@@ -8,7 +8,9 @@
               <img
                 mat-card-avatar
                 class="card-image"
-                src="{{ ch.thumbnail.path }}/standard_fantastic.jpg"
+                src="{{ ch.thumbnail.path }}/standard_fantastic.{{
+                  ch.thumbnail.extension
+                }}"
                 onerror='this.src="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/standard_fantastic.jpg"'
                 alt="Photo of a Character"
                 position="start"
@@ -26,8 +28,20 @@
             </mat-card-content>
           </div>
           <mat-card-actions align="end">
-            <button mat-button>Like</button>
-            <button mat-button>SHARE</button>
+            <button
+              mat-button
+              [disabled]="isLoading"
+              (click)="onOpenModalSeries(ch.id, ch.name)"
+            >
+              Open list of Series
+            </button>
+            <button
+              mat-button
+              [disabled]="isLoading"
+              (click)="onOpenModalComics(ch.id, ch.name)"
+            >
+              Open list of Comics
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>

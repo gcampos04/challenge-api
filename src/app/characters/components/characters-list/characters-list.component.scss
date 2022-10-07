@@ -17,6 +17,7 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  margin-top: 80px;
 }
 
 .card {
@@ -25,22 +26,10 @@ section {
   flex-direction: column;
   justify-content: space-between;
   gap: 5px;
-  width: 290px;
+  // width: 290px;
+  width: 350px;
   min-height: 100%;
   background-color: #504a4a;
-}
-
-.card-title {
-  // display: -webkit-box;
-  // -webkit-line-clamp: 2;
-  // -webkit-box-orient: vertical;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // font-size: x-large;
-}
-
-.mat-card-header-text{
-  margin-left: 0px;
 }
 
 .card-image {
@@ -59,11 +48,9 @@ section {
 .card-content p {
   height: fit-content;
   display: -webkit-box;
-  // -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  // text-align: center;
 }
 
 .mat-card-header{
@@ -87,11 +74,10 @@ section {
 
 .error-container{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: xx-large;
 }
 
