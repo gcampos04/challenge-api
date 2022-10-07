@@ -74,4 +74,32 @@ export class CharactersService {
       });
     return;
   }
+
+  getCharacterSeries(idCharacter: number) {
+    this._loadingService.show();
+
+    const finalUrl = `${this.apiUrl}/${idCharacter}/series?ts=${this.timestamp}&apikey=${environment.publicK}&hash=${this.hash}`;
+    const result: any = this.http.get(finalUrl);
+
+    return result.pipe(
+      tap(() => {
+        this.haveRequest = false;
+        this._loadingService.hide();
+      })
+    );
+  }
+
+  getCharacterComics(idCharacter: number) {
+    this._loadingService.show();
+
+    const finalUrl = `${this.apiUrl}/${idCharacter}/comics?ts=${this.timestamp}&apikey=${environment.publicK}&hash=${this.hash}`;
+    const result: any = this.http.get(finalUrl);
+
+    return result.pipe(
+      tap(() => {
+        this.haveRequest = false;
+        this._loadingService.hide();
+      })
+    );
+  }
 }
