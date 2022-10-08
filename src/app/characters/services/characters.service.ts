@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { LoadingService } from 'src/app/shared/components/loading/services/loading.service';
 import { ErrorMsgEnum } from 'src/app/shared/enum/error-msg';
