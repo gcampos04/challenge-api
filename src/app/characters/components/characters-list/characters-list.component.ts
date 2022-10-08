@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   Component,
   ElementRef,
@@ -48,6 +49,7 @@ export class CharactersListComponent implements OnInit {
 
   constructor(
     private _charactersService: CharactersService,
+    private liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog
   ) {
     this._charactersService.getAllCharacters(0, 40);
@@ -74,6 +76,7 @@ export class CharactersListComponent implements OnInit {
           },
         });
         this.isLoading = false;
+        this.liveAnnouncer.announce('Open character series list.');
       });
   }
 
@@ -93,6 +96,7 @@ export class CharactersListComponent implements OnInit {
           },
         });
         this.isLoading = false;
+        this.liveAnnouncer.announce('Open character comics list.');
       });
   }
 
@@ -111,6 +115,7 @@ export class CharactersListComponent implements OnInit {
           this.allCharacters = res;
         }
       }
+      this.liveAnnouncer.announce('Search return completed');
     });
   }
 }
