@@ -18,7 +18,7 @@ import { CharactersService } from '../../services/characters.service';
 })
 export class CharactersListComponent implements OnInit {
   //Variaveis
-  private offset: number = 40;
+  private offset: number = 9;
 
   allCharacters: allCharacters[] = [];
 
@@ -42,8 +42,8 @@ export class CharactersListComponent implements OnInit {
       !this._charactersService.haveRequest &&
       !this._charactersService.searching
     ) {
-      this._charactersService.getAllCharacters(this.offset, 40);
-      this.offset += 40;
+      this._charactersService.getAllCharacters(this.offset, 9);
+      this.offset += 9;
     }
   }
 
@@ -52,7 +52,7 @@ export class CharactersListComponent implements OnInit {
     private liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog
   ) {
-    this._charactersService.getAllCharacters(0, 40);
+    this._charactersService.getAllCharacters(0, 9);
   }
 
   searchState: boolean = false;
