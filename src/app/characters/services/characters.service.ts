@@ -1,7 +1,11 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { LoadingService } from 'src/app/shared/components/loading/services/loading.service';
+import { ErrorMsgEnum } from 'src/app/shared/enum/error-msg';
 import { environment } from 'src/environments/environment';
 import { Md5 } from 'ts-md5';
 
@@ -25,12 +29,24 @@ export class CharactersService {
 
   constructor(
     private http: HttpClient,
-    private _loadingService: LoadingService
+    private _loadingService: LoadingService,
+    public dialog: MatDialog,
+    private liveAnnouncer: LiveAnnouncer
   ) {
     this.hash = Md5.hashStr(
       this.timestamp + environment.privateK + environment.publicK
     );
     this.authUrl = `${this.apiUrl}?ts=${this.timestamp}&apikey=${environment.publicK}&hash=${this.hash}`;
+  }
+
+  onError(errorMsg: string, reloading: boolean) {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      data: errorMsg,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.liveAnnouncer.announce('Closed modal error.');
+      if (reloading) window.location.reload();
+    });
   }
 
   getAllCharacters(offset: number, limit: number) {
@@ -46,14 +62,21 @@ export class CharactersService {
           this._loadingService.hide();
         })
       )
-      .subscribe((res: any) => this.characters.next(res.data.results));
+      .subscribe(
+        (res: any) => {
+          this.characters.next(res.data.results);
+        },
+        (err: any) => {
+          this.onError(ErrorMsgEnum.loadingList, true);
+        }
+      );
   }
 
   searchCharacters(search: string) {
     this._loadingService.show();
 
     if (search == '') {
-      this.getAllCharacters(0, 40);
+      this.getAllCharacters(0, 9);
       return (this.searching = false);
     }
 
@@ -69,9 +92,14 @@ export class CharactersService {
           this._loadingService.hide();
         })
       )
-      .subscribe((res: any) => {
-        this.characters.next(res.data.results);
-      });
+      .subscribe(
+        (res: any) => {
+          this.characters.next(res.data.results);
+        },
+        (err: any) => {
+          this.onError(ErrorMsgEnum.loadingList, true);
+        }
+      );
     return;
   }
 
@@ -82,9 +110,16 @@ export class CharactersService {
     const result: any = this.http.get(finalUrl);
 
     return result.pipe(
-      tap(() => {
-        this.haveRequest = false;
-        this._loadingService.hide();
+      tap({
+        next: () => {
+          this.haveRequest = false;
+          this._loadingService.hide();
+        },
+        error: () => {
+          this.haveRequest = false;
+          this._loadingService.hide();
+          this.onError(ErrorMsgEnum.loadingCharacterSeries, false);
+        },
       })
     );
   }
@@ -96,9 +131,16 @@ export class CharactersService {
     const result: any = this.http.get(finalUrl);
 
     return result.pipe(
-      tap(() => {
-        this.haveRequest = false;
-        this._loadingService.hide();
+      tap({
+        next: () => {
+          this.haveRequest = false;
+          this._loadingService.hide();
+        },
+        error: () => {
+          this.haveRequest = false;
+          this._loadingService.hide();
+          this.onError(ErrorMsgEnum.loadingCharacterComics, false);
+        },
       })
     );
   }

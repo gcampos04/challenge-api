@@ -63,11 +63,10 @@ export class CharactersListComponent implements OnInit {
 
   onOpenModalSeries(idCharacter: number, nameCharacter: string) {
     this.isLoading = true;
-    this._charactersService
-      .getCharacterSeries(idCharacter)
-      .subscribe((res: any) => {
+    this._charactersService.getCharacterSeries(idCharacter).subscribe(
+      (res: any) => {
         this.allSeries = res?.data?.results;
-        this.dialog.open(ModalComponent, {
+        const dialogRef = this.dialog.open(ModalComponent, {
           data: {
             name: nameCharacter,
             info: this.allSeries,
@@ -77,17 +76,23 @@ export class CharactersListComponent implements OnInit {
         });
         this.isLoading = false;
         this.liveAnnouncer.announce('Open character series list.');
-      });
+        dialogRef.afterClosed().subscribe((result) => {
+          this.liveAnnouncer.announce('Closed character series list.');
+        });
+      },
+      (err: any) => {
+        this.isLoading = false;
+      }
+    );
   }
 
   onOpenModalComics(idCharacter: number, nameCharacter: string) {
     this.isLoading = true;
-    this._charactersService
-      .getCharacterComics(idCharacter)
-      .subscribe((res: any) => {
+    this._charactersService.getCharacterComics(idCharacter).subscribe(
+      (res: any) => {
         this.isLoading = true;
         this.allComics = res?.data?.results;
-        this.dialog.open(ModalComponent, {
+        const dialogRef = this.dialog.open(ModalComponent, {
           data: {
             name: nameCharacter,
             info: this.allComics,
@@ -97,12 +102,22 @@ export class CharactersListComponent implements OnInit {
         });
         this.isLoading = false;
         this.liveAnnouncer.announce('Open character comics list.');
-      });
+        dialogRef.afterClosed().subscribe((result) => {
+          this.liveAnnouncer.announce('Closed character comics list.');
+        });
+      },
+      (err: any) => {
+        this.isLoading = false;
+      }
+    );
   }
 
   getCharacters() {
     this._charactersService.characters$.subscribe((res) => {
       if (res) {
+        res.length !== 0
+          ? this.liveAnnouncer.announce('Search return completed.')
+          : this.liveAnnouncer.announce('Character not found.');
         this.isLoading = false;
         if (this.searchState != this._charactersService.searching) {
           this.searchState = this._charactersService.searching;
@@ -115,7 +130,6 @@ export class CharactersListComponent implements OnInit {
           this.allCharacters = res;
         }
       }
-      this.liveAnnouncer.announce('Search return completed');
     });
   }
 }
