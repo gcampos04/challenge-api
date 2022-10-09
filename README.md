@@ -2,13 +2,24 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
 
+This project uses marverl api to query information related to marvel characters.
+
+For the requests to be completed it is necessary to inform the public key and the private key in the /environment/environment.ts file.
+
+```javascript
+export const environment = {
+  production: false,
+
+  privateK: "",
+  publicK: "",
+};
+```
+
+Project hosting url: https://challenge-api-a7276.web.app/characters
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
