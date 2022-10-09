@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, tap, Observable } from 'rxjs';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { LoadingService } from 'src/app/shared/components/loading/services/loading.service';
 import { ErrorMsgEnum } from 'src/app/shared/enum/error-msg';
@@ -23,7 +24,7 @@ export class CharactersService {
 
   characters = new BehaviorSubject<any>(null);
 
-  get characters$() {
+  get characters$(): any {
     return this.characters.asObservable();
   }
 
@@ -45,8 +46,8 @@ export class CharactersService {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.liveAnnouncer.announce('Closed modal error.');
-      if (reloading) window.location.reload();
     });
+    if (reloading) this.getAllCharacters(0, 9);
   }
 
   getAllCharacters(offset: number, limit: number) {
@@ -70,6 +71,8 @@ export class CharactersService {
           this.onError(ErrorMsgEnum.loadingList, true);
         }
       );
+
+    return subject;
   }
 
   searchCharacters(search: string) {
@@ -128,6 +131,7 @@ export class CharactersService {
     this._loadingService.show();
 
     const finalUrl = `${this.apiUrl}/${idCharacter}/comics?ts=${this.timestamp}&apikey=${environment.publicK}&hash=${this.hash}`;
+
     const result: any = this.http.get(finalUrl);
 
     return result.pipe(

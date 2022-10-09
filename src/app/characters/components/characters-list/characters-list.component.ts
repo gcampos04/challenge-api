@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/characters/components/modal/modal.component';
+
 import { allCharacters } from '../../model/character';
 import { CharactersService } from '../../services/characters.service';
 
@@ -113,7 +114,7 @@ export class CharactersListComponent implements OnInit {
   }
 
   getCharacters() {
-    this._charactersService.characters$.subscribe((res) => {
+    this._charactersService.characters$.subscribe((res: any) => {
       if (res) {
         res.length !== 0
           ? this.liveAnnouncer.announce('Search return completed.')

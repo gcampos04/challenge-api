@@ -8,14 +8,7 @@ import { CharactersService } from 'src/app/characters/services/characters.servic
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  constructor(
-    private sidenav: AppComponent,
-    private _charactersService: CharactersService
-  ) {}
-
-  toggleSideNav() {
-    this.sidenav.toggle();
-  }
+  constructor(private _charactersService: CharactersService) {}
 
   timer: any;
   search(inputSearch: HTMLInputElement) {

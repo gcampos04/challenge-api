@@ -1,8 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let app: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let activeRouted: ActivatedRoute;
+  let router: Router;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -10,15 +16,20 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  beforeEach(async () => {
+    fixture = TestBed.createComponent(AppComponent);
+    app = fixture.componentInstance;
+    activeRouted = TestBed.inject(ActivatedRoute);
+    router = TestBed.inject(Router);
+
+    fixture.detectChanges();
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'challenge-api'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
     expect(app.title).toEqual('challenge-api');
   });
 });
