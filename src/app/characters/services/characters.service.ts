@@ -46,8 +46,8 @@ export class CharactersService {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.liveAnnouncer.announce('Closed modal error.');
+      if (reloading) this.getAllCharacters(0, 9);
     });
-    if (reloading) this.getAllCharacters(0, 9);
   }
 
   getAllCharacters(offset: number, limit: number) {
