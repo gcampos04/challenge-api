@@ -41,11 +41,12 @@ export class CharactersService {
   }
 
   onError(errorMsg: string, reloading: boolean) {
+    this.liveAnnouncer.announce('Open dialog error.');
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.liveAnnouncer.announce('Closed modal error.');
+      this.liveAnnouncer.announce('Closed dialog error.');
       if (reloading) this.getAllCharacters(0, 9);
     });
   }

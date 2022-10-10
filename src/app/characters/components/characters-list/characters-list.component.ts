@@ -19,7 +19,7 @@ import { CharactersService } from '../../services/characters.service';
 })
 export class CharactersListComponent implements OnInit {
   //Variaveis
-  private offset: number = 9;
+  offset: number = 9;
 
   allCharacters: allCharacters[] = [];
 

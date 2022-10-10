@@ -9,6 +9,7 @@ import {
   mockCharacterSeriesResponse,
   mockGetAllCharactersResponse,
 } from 'src/app/mocks/characters.mock';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { CharactersService } from '../../services/characters.service';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -18,8 +19,6 @@ describe('CharactersListComponent', () => {
   let component: CharactersListComponent;
   let fixture: ComponentFixture<CharactersListComponent>;
 
-  let globalObjectService: jasmine.SpyObj<CharactersListComponent>;
-
   let _charactersService: CharactersService;
 
   let idCharacter = 1010903;
@@ -28,19 +27,11 @@ describe('CharactersListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CharactersListComponent, ModalComponent],
-      imports: [
-        MatDialogModule,
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-      ],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, SharedModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    globalObjectService = jasmine.createSpyObj('GlobalObjectService', [
-      'getWindow',
-    ]);
-
     fixture = TestBed.createComponent(CharactersListComponent);
     component = fixture.componentInstance;
     _charactersService = TestBed.inject(CharactersService);
@@ -96,5 +87,10 @@ describe('CharactersListComponent', () => {
     component.onOpenModalComics(idCharacter, nameCharacter);
 
     expect(component.isLoading).toBeFalse();
+  });
+
+  it('should test HostListener', () => {
+    component.onWindowScroll();
+    expect(component.offset).toBe(9);
   });
 });
