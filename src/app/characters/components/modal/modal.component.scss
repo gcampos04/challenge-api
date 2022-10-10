@@ -1,0 +1,12 @@
+.container {
+  width: 700px;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.mat-list-base .mat-list-item {
+  margin-bottom: 1rem;
+  height: auto;
+}

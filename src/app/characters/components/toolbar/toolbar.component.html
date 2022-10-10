@@ -1,0 +1,24 @@
+<nav class="float">
+  <mat-toolbar>
+    <h2 class="sr-only">Search for your character</h2>
+    <div class="container">
+      <a href="/">
+        <div class="logo" translate="no">MARVE<span>L</span></div>
+      </a>
+      <div class="form-field">
+        <mat-icon class="search-icon">search</mat-icon>
+        <label
+          ><p class="sr-only">Search for a character</p>
+          <input
+            type="text"
+            placeholder="Search for a character"
+            aria-placeholder="Use this field to search for the character"
+            #inputSearch
+            (input)="search(inputSearch)"
+          />
+        </label>
+      </div>
+    </div>
+  </mat-toolbar>
+  <app-loading></app-loading>
+</nav>

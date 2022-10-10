@@ -1,0 +1,20 @@
+<div class="container">
+  <h2 mat-dialog-title>{{ data.name }} {{ data.type }} list:</h2>
+  <mat-dialog-content>
+    <mat-list role="list">
+      <mat-list-item
+        tabindex="0"
+        role="listitem"
+        *ngFor="let item of data.info"
+        >{{ item.title }}</mat-list-item
+      >
+      <mat-list-item tabindex="0" role="listitem" *ngIf="data.length === 0">{{
+        data.type === "comics" ? "Comics unavailable" : "Series unavailable"
+      }}</mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button tabindex="0" mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>
