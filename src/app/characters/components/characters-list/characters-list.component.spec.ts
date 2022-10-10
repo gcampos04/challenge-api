@@ -3,11 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import {
   mockCharacterComicsResponse,
   mockCharacterSeriesResponse,
   mockGetAllCharactersResponse,
+  mocksearchCharactersResponse,
 } from 'src/app/mocks/characters.mock';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CharactersService } from '../../services/characters.service';
@@ -89,8 +90,16 @@ describe('CharactersListComponent', () => {
     expect(component.isLoading).toBeFalse();
   });
 
-  it('should test HostListener', () => {
+  it('should test HostListener scroll < documentheight', () => {
+    _charactersService.searching = false;
+    _charactersService.haveRequest = false;
+    const scroll = 5;
+    const documentheight = 10;
     component.onWindowScroll();
+    expect(component.offset).toBe(18);
+  });
+
+  it('should test HostListener', () => {
     expect(component.offset).toBe(9);
   });
 });
